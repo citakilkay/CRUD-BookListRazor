@@ -1,0 +1,81 @@
+﻿@page
+@model BookListRazor.Pages.BookList.IndexModel
+@{
+}
+
+<h1 class="text-center">Books</h1>
+
+<button type="button" class="btn btn-primary my-4" data-toggle="modal" data-target="#newBookModal">
+    Create New Book
+</button>
+<!--    Modal Create New Book   -->
+<div class="modal fade" id="newBookModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Book</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div class="form-group">
+                        <label asp-for="Book.Name">Book Name</label>
+                        <input type="text" asp-for="Book.Name" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Book.Author">Book Author</label>
+                        <input class="form-control" type="text" asp-for="Book.Author" required />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Book.Page">Book Pages</label>
+                        <input type="number" asp-for="Book.Page" value="0" class="form-control" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add Book</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@{int index = 1;}
+<table class="table">
+    <thead class="thead-light">
+        <tr class="my-1">
+            <th>#</th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Pages</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <form method="post">
+            @foreach (var book in Model.Books)
+            {
+            <tr>
+                <td>@index</td>
+                <td>@book.Id</td>
+                <td>@book.Name</td>
+                <td>@book.Author</td>
+                <td>@book.Page</td>
+                <td>
+                    <a class="btn btn-secondary" asp-page="EditPage" asp-route-id="@book.Id">Edit</a>
+                    <button asp-page-handler="Delete" asp-route-id="@book.Id" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+            }
+        </form>
+    </tbody>
+</table>
+<script>
+    // data-toggle="modal" data-target="#editBookModal"
+
+</script>
+    @section Scripts{
+        <partial name="_ValidationScriptsPartial" />
+    }

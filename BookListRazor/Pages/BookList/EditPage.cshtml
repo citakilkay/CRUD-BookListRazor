@@ -1,0 +1,24 @@
+﻿@page
+@model BookListRazor.Pages.BookList.EditPageModel
+@{
+}
+
+<h2 class="text-center">Edit Book</h2>
+<form method="post">
+    <div class="form-group">
+        <label asp-for="EditBook.Name">Book Name</label>
+        <input type="text" asp-for="EditBook.Name" class="form-control" required value="@Model.EditBook.Name" />
+    </div>
+    <div class="form-group">
+        <label asp-for="EditBook.Author">Book Author</label>
+        <input class="form-control" type="text" asp-for="EditBook.Author" required value="@Model.EditBook.Author" />
+    </div>
+    <div class="form-group">
+        <label asp-for="EditBook.Page">Book Pages</label>
+        <input type="number" asp-for="EditBook.Page" class="form-control" value="@Model.EditBook.Page" />
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-secondary">Close</button>
+        <button type="submit" asp-page-handler="Update" class="btn btn-primary" asp-route-id="@Model.EditBook.Id">Edit Book</button>
+    </div>
+</form>
